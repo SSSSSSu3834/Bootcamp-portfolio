@@ -16,6 +16,7 @@ export default function BoardWrite() {
   const [addressNumber, setAddressNumber] = useState("");
   const [address, setAddress] = useState("");
   const [youtub, setYoutub] = useState("");
+  const [isActive, setIsActive] = useState(false);
 
   //에러 메시지
   const [errName, setErrName] = useState("");
@@ -27,21 +28,33 @@ export default function BoardWrite() {
   const onChangeName = (e) => {
     setName(e.target.value);
     setErrName("");
+    if (e.target.value && password && title && content) {
+      setIsActive(true);
+    }
   };
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
     setErrPassword("");
+    if (name && e.target.value && title && content) {
+      setIsActive(true);
+    }
   };
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
     setErrTitle("");
+    if (e.target.value && password && name && content) {
+      setIsActive(true);
+    }
   };
 
   const onChangeContent = (e) => {
     setContent(e.target.value);
     setErrContent("");
+    if (e.target.value && password && title && name) {
+      setIsActive(true);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -86,6 +99,7 @@ export default function BoardWrite() {
         errTitle={errTitle}
         errPassword={errPassword}
         errContent={errContent}
+        isActive={isActive}
       />
     </div>
   );

@@ -146,7 +146,7 @@ export const RadioWrapper = styled.div`
 
 //등록 버튼
 export const SubmitBtn = styled.button`
-  background-color: #ffd600;
+  background-color: ${(props) => (props.isActive ? "#ffd600" : "#BDBDBD")};
   font-size: 16px;
   padding: 14px 60px 14px 60px;
   color: black;

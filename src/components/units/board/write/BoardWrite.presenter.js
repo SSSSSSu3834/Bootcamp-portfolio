@@ -91,7 +91,9 @@ export default function BoardWriteUI(props) {
             </S.RadioWrapper>
           </S.Leftside>
 
-          <S.SubmitBtn onClick={props.handleSubmit}>등록하기</S.SubmitBtn>
+          <S.SubmitBtn onClick={props.handleSubmit} isActive={props.isActive}>
+            등록하기
+          </S.SubmitBtn>
         </S.Wrapper>
       </S.Container>
     </div>
