@@ -158,3 +158,30 @@ export const ErrMessage = styled.div`
   margin-top: 5px;
   color: red;
 `;
+
+export const CancleBtn = styled.button`
+  margin-right: 24px;
+  background-color: #bdbdbd;
+  font-size: 16px;
+  padding: 14px 60px 14px 60px;
+  color: black;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+`;
+
+export const UpdateBtn = styled.button`
+  background-color: #ffd600;
+  font-size: 16px;
+  padding: 14px 60px 14px 60px;
+  color: black;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;

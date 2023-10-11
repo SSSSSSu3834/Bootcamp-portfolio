@@ -5,13 +5,15 @@ export default function BoardWriteUI(props) {
     <div>
       <S.Container>
         <S.Wrapper>
-          <h2>게시물 등록</h2>
+          <h2>게시물 {props.isEdit ? "수정" : "등록"}</h2>
           <S.DefaultValue>
             <S.LeftItem>
               <S.Title>작성자</S.Title>
               <S.InputBox
                 placeholder="이름을 입력해주세요."
                 onChange={props.onChangeName}
+                readOnly={props.data?.fetchBoard.writer}
+                defaultValue={props.data?.fetchBoard.writer}
               />
               <S.ErrMessage>{props.errName}</S.ErrMessage>
             </S.LeftItem>
@@ -30,6 +32,7 @@ export default function BoardWriteUI(props) {
             <S.TitleInput
               placeholder="제목을 작성해주세요."
               onChange={props.onChangeTitle}
+              defaultValue={props.data?.fetchBoard.title}
             />
             <S.ErrMessage>{props.errTitle}</S.ErrMessage>
           </S.Item>
@@ -38,6 +41,7 @@ export default function BoardWriteUI(props) {
             <S.TextareaBox
               placeholder="내용을 작성해주세요."
               onChange={props.onChangeContent}
+              defaultValue={props.data?.fetchBoard.contents}
             />
             <S.ErrMessage>{props.errContent}</S.ErrMessage>
           </S.Item>
@@ -91,9 +95,23 @@ export default function BoardWriteUI(props) {
             </S.RadioWrapper>
           </S.Leftside>
 
-          <S.SubmitBtn onClick={props.handleSubmit} isActive={props.isActive}>
-            등록하기
-          </S.SubmitBtn>
+          {props.isEdit ? (
+            <>
+              <S.BtnWrapper>
+                <S.CancleBtn onClick={props.goBoards}>취소하기</S.CancleBtn>
+                <S.UpdateBtn onClick={props.handleUpdate}>수정하기</S.UpdateBtn>
+              </S.BtnWrapper>
+            </>
+          ) : (
+            <>
+              <S.SubmitBtn
+                onClick={props.handleSubmit}
+                isActive={props.isActive}
+              >
+                등록하기
+              </S.SubmitBtn>
+            </>
+          )}
         </S.Wrapper>
       </S.Container>
     </div>

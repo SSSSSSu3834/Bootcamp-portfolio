@@ -33,6 +33,10 @@ export default function BoardDetail() {
     });
   };
 
+  const goEdit = () => {
+    router.push(`/boards/${router.query.number}/edit`);
+  };
+
   console.log(data);
   return (
     <div>
@@ -41,6 +45,7 @@ export default function BoardDetail() {
         data={data}
         goBoards={goBoards}
         onDelete={onDelete}
+        goEdit={goEdit}
       />
     </div>
   );

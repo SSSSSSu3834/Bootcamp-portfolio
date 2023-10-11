@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { CREATE_BOARD } from "./BoardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 
-export default function BoardWrite() {
+export default function BoardWrite(props) {
   const router = useRouter();
   const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   //input창 State
   const [name, setName] = useState("");
@@ -57,6 +58,11 @@ export default function BoardWrite() {
     }
   };
 
+  //수정하기 페이지에서 취소하기 버튼 눌렀을 때 실행되는 함수
+  const goBoards = () => {
+    router.push(`/boards`);
+  };
+
   const handleSubmit = async (e) => {
     {
       name ? setErrName("") : setErrName("이름을 입력하세요");
@@ -87,6 +93,40 @@ export default function BoardWrite() {
     }
   };
 
+  //update 함수
+  const handleUpdate = async () => {
+    if (!content && !title) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
+    if (!password) {
+      alert("비밀번호를 입력하세요");
+      return;
+    }
+    try {
+      const updateBoardInput = {};
+
+      if (title) {
+        updateBoardInput.title = title;
+      }
+      if (content) {
+        updateBoardInput.contents = content;
+      }
+
+      const result = await updateBoard({
+        variables: {
+          boardId: router.query.number,
+          password,
+          updateBoardInput,
+        },
+      });
+
+      router.push(`/boards/${result.data.updateBoard._id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <BoardWriteUI
@@ -95,11 +135,15 @@ export default function BoardWrite() {
         onChangeTitle={onChangeTitle}
         onChangeContent={onChangeContent}
         handleSubmit={handleSubmit}
+        handleUpdate={handleUpdate}
         errName={errName}
         errTitle={errTitle}
         errPassword={errPassword}
         errContent={errContent}
         isActive={isActive}
+        isEdit={props.isEdit}
+        goBoards={goBoards}
+        data={props.data}
       />
     </div>
   );
