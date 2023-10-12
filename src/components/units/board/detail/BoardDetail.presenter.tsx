@@ -1,12 +1,14 @@
 import * as S from "./BoardDetail.styles";
+import Image from "next/image";
+import { IBoardDetailUi } from "./BoardDetail.types";
 
-export default function BoardDetailUi(props) {
+export default function BoardDetailUi(props: IBoardDetailUi) {
   return (
     <div>
       <S.Container>
         <S.Wrapper>
           <S.Header>
-            <props.Image
+            <Image
               src="/profile.svg"
               alt="프로필 이미지"
               width={56}

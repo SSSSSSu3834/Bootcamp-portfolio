@@ -1,6 +1,7 @@
 import * as S from "./BoardWrite.styles";
+import { IBoardWriteUI } from "./BoardWrite.types";
 
-export default function BoardWriteUI(props) {
+export default function BoardWriteUI(props: IBoardWriteUI) {
   return (
     <div>
       <S.Container>
@@ -12,8 +13,8 @@ export default function BoardWriteUI(props) {
               <S.InputBox
                 placeholder="이름을 입력해주세요."
                 onChange={props.onChangeName}
-                readOnly={props.data?.fetchBoard.writer}
-                defaultValue={props.data?.fetchBoard.writer}
+                readOnly={!!props.data?.fetchBoard.writer}
+                defaultValue={props.data?.fetchBoard.writer ?? ""}
               />
               <S.ErrMessage>{props.errName}</S.ErrMessage>
             </S.LeftItem>

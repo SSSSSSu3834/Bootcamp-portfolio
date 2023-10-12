@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { IBoardWrite, IUpdateBoardInput } from "./BoardWrite.types";
 
-export default function BoardWrite(props) {
+export default function BoardWrite(props: IBoardWrite) {
   const router = useRouter();
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
@@ -26,7 +27,7 @@ export default function BoardWrite(props) {
   const [errContent, setErrContent] = useState("");
 
   //onChange 함수 만들고 props 연결하기
-  const onChangeName = (e) => {
+  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
     setErrName("");
     if (e.target.value && password && title && content) {
@@ -34,7 +35,7 @@ export default function BoardWrite(props) {
     }
   };
 
-  const onChangePassword = (e) => {
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     setErrPassword("");
     if (name && e.target.value && title && content) {
@@ -42,7 +43,7 @@ export default function BoardWrite(props) {
     }
   };
 
-  const onChangeTitle = (e) => {
+  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
     setErrTitle("");
     if (e.target.value && password && name && content) {
@@ -50,7 +51,7 @@ export default function BoardWrite(props) {
     }
   };
 
-  const onChangeContent = (e) => {
+  const onChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
     setErrContent("");
     if (e.target.value && password && title && name) {
@@ -104,14 +105,10 @@ export default function BoardWrite(props) {
       return;
     }
     try {
-      const updateBoardInput = {};
+      const updateBoardInput: IUpdateBoardInput = {};
 
-      if (title) {
-        updateBoardInput.title = title;
-      }
-      if (content) {
-        updateBoardInput.contents = content;
-      }
+      if (title) updateBoardInput.title = title;
+      if (content) updateBoardInput.contents = content;
 
       const result = await updateBoard({
         variables: {

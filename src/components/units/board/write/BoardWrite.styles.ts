@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ISubmitBtn } from "./BoardWrite.types";
 
 export const Container = styled.div`
   display: flex;
@@ -146,7 +147,8 @@ export const RadioWrapper = styled.div`
 
 //등록 버튼
 export const SubmitBtn = styled.button`
-  background-color: ${(props) => (props.isActive ? "#ffd600" : "#BDBDBD")};
+  background-color: ${(props: ISubmitBtn) =>
+    props.isActive ? "#ffd600" : "#BDBDBD"};
   font-size: 16px;
   padding: 14px 60px 14px 60px;
   color: black;

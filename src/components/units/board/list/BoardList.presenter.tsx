@@ -1,6 +1,9 @@
-import * as S from "../list/BoardList.styles";
+import { IQuery } from "../../../../commons/types/generated/types";
+import * as S from "./BoardList.styles";
+import { IBoardListUI } from "./BoardList.types";
+import { MouseEvent } from "react";
 
-export default function BoardListUI(props) {
+export default function BoardListUI(props: IBoardListUI) {
   return (
     <div>
       <S.Wrapper>
@@ -12,14 +15,15 @@ export default function BoardListUI(props) {
         </S.TopBar>
         {props.data?.fetchBoards?.map((el) => (
           <S.List key={el._id}>
-            <span>{el._id.slice(0, 5)}</span>{" "}
+            <span>{el._id.slice(0, 5)}</span>
             <S.TitleCLick
-              onClick={(e) => {
-                props.router.push(`./boards/${el._id}`);
+              id={el._id}
+              onClick={(e: MouseEvent<HTMLDivElement>) => {
+                props.router.push(`/boards/${el._id}`);
               }}
             >
               {el.title}
-            </S.TitleCLick>{" "}
+            </S.TitleCLick>
             <span>{el.writer}</span> <span>{el.createdAt.slice(0, 10)}</span>
           </S.List>
         ))}
