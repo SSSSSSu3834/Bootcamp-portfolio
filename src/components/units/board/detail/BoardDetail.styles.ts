@@ -74,4 +74,13 @@ export const Btn = styled.button`
 export const BtnWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 87px;
+`;
+
+export const PartLine = styled.div`
+  width: 1200px;
+  height: 1px;
+  border-top: 1px solid #bdbdbd;
+  margin-top: 20px;
+  margin-bottom: 40px;
 `;

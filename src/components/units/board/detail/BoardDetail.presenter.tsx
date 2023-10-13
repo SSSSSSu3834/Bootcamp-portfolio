@@ -29,6 +29,7 @@ export default function BoardDetailUi(props: IBoardDetailUi) {
           <S.Btn onClick={props.goEdit}>수정하기</S.Btn>
           <S.Btn onClick={props.onDelete}>삭제하기</S.Btn>
         </S.BtnWrapper>
+        <S.PartLine />
       </S.Container>
     </div>
   );

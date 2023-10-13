@@ -11,7 +11,7 @@ export default function App({ Component }: AppProps) {
   return (
     <div>
       <ApolloProvider client={client}>
-        <Component />;
+        <Component />
       </ApolloProvider>
     </div>
   );
