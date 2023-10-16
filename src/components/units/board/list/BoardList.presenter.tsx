@@ -2,6 +2,7 @@ import { IQuery } from "../../../../commons/types/generated/types";
 import * as S from "./BoardList.styles";
 import { IBoardListUI } from "./BoardList.types";
 import { MouseEvent } from "react";
+import Pagination from "../../../../components/commons/pagination";
 
 export default function BoardListUI(props: IBoardListUI) {
   return (
@@ -28,6 +29,7 @@ export default function BoardListUI(props: IBoardListUI) {
           </S.List>
         ))}
         <S.Line />
+        <Pagination refetch={props.refetch} />
         <S.BtnWrapper>
           <S.NewBtn onClick={props.onCreateBtn}>게시물 등록하기</S.NewBtn>
         </S.BtnWrapper>

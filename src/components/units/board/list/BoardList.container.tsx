@@ -8,9 +8,10 @@ import {
 } from "../../../../commons/types/generated/types";
 
 export default function BoardList() {
-  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
-    FETCH_BOARDS
-  );
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchBoards">,
+    IQueryFetchBoardsArgs
+  >(FETCH_BOARDS);
 
   const router = useRouter();
 
@@ -25,7 +26,12 @@ export default function BoardList() {
 
   return (
     <div>
-      <BoardListUI onCreateBtn={onCreateBtn} data={data} router={router} />
+      <BoardListUI
+        onCreateBtn={onCreateBtn}
+        data={data}
+        router={router}
+        refetch={refetch}
+      />
     </div>
   );
 }

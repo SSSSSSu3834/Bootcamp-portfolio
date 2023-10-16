@@ -6,4 +6,5 @@ export interface IBoardListUI {
   onCreateBtn: () => void;
   data?: Pick<IQuery, "fetchBoards">;
   router: NextRouter;
+  refetch: any;
 }
