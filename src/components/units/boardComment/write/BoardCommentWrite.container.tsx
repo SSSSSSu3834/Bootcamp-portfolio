@@ -1,11 +1,11 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import { useState } from "react";
 import { ChangeEvent, MouseEvent } from "react";
 import { useRouter } from "next/router";
 import { FETCH_BOARDCOMMENT } from "../list/BoardCommentList.queries";
-import { CREATE_BOARDCOMMENT } from "./BoardCommenetWrite.queries";
+import { CREATE_BOARDCOMMENT } from "./BoardCommentWrite.queries";
 
 const BoardCommentWrite = () => {
   const [writer, setWriter] = useState("");
@@ -16,6 +16,11 @@ const BoardCommentWrite = () => {
   const router = useRouter();
 
   const [createBoardComment] = useMutation(CREATE_BOARDCOMMENT);
+  const { data, refetch } = useQuery(FETCH_BOARDCOMMENT, {
+    variables: {
+      boardId: router.query.number,
+    },
+  });
 
   const onChangeName = (e) => {
     setWriter(e.target.value);
@@ -40,13 +45,16 @@ const BoardCommentWrite = () => {
           rating: 2, //별점 임시설정
         },
       },
-      refetchQueries: [
-        {
-          query: FETCH_BOARDCOMMENT,
-          variables: { boardId: router.query.boardId },
-        },
-      ],
+      // refetchQueries: [
+      //   {
+      //     query: FETCH_BOARDCOMMENT,
+      //     variables: { boardId: router.query.boardId },
+      //   },
+      // ],
     });
+
+    // 댓글쿼리를 리패치 해왔음
+    refetch({ boardId: router.query.number });
 
     console.log(result);
   };
